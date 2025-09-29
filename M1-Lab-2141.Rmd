@@ -87,7 +87,6 @@ ra %>%
 
 ```
 
-In the data, there was 417 females and 98 males included that did not have missing data, so approximately 81% of the data studied were female patients and roughly 19% were male patients. The bar chart shows a much higher count for females than for the males, almost by 4 fold.
 
 
 ## Age  
@@ -118,7 +117,6 @@ ra %>%
 ```
 
 
-From the histogram, the distribution is slightly skewed to the right meaning our mean age will be slightly larger than the median age. The median Age of the patients studied was 59 years old, and the IQR of the data is 12 with a standard deviation of 10.2 years.
 
 
 ## Whether DAS_28 was measured 
@@ -142,7 +140,6 @@ ra %>%
 
 ```
 
-Considering the data, excluding rows with missing data, there was 449 patients who did not have DAS_28 measured and 66 patients who did have their DAS_28 measured. So, approximately 87% of patients did not have their DAS_28 measured, while 13% did have their DAS_28 measured. The bar chart shows a much higher count for patients who did not have their DAS_28 measured, than for the ones who did.
 
 ## DAS_28 values
 
@@ -167,7 +164,6 @@ ra %>% drop_na(DAS_28) %>%
   theme_bw()
 ```
 
-From the boxplot, DAS_28 is skewed to the right. The median DAS_28 measured from the patients studied was 2.5 joints. The IQR of the data was 1.48 with a standard deviation of 2.77 joints. The maximum (possible outlier) of the patients studied had a disease score activity of 23 joints, meaning this patient suffered a more severe disease compared to the average.
 
 
 ## Years from diagnosis
@@ -197,7 +193,6 @@ ra %>% drop_na(Yrs_From_Dx) %>%
 
 ```
 
-From the histogram, the Years from RA diagnosis is heavily skewed to the right. The median Years from RA diagnosis measured was 7 years. The IQR of the data was 8 years with a standard deviation of 9.29 years. The maximum (possible outlier) years from diagnosis of the patients studied was recorded at 70 years, meaning this patient was diagnosis much later than other patients.
 
 # Part 3: Bivariate Numerical and Visualization Summary  
 
@@ -216,7 +211,6 @@ cor(ra$Yrs_From_Dx, ra$DAS_28, use = "pairwise.complete.obs")
 cor(ra$Yrs_From_Dx, ra$DAS_28, use = "pairwise.complete.obs", method = "spearman")
 ```
 
-For both the Pearson and Spearman Correlations, the values are very close to 0. The Pearson Correlation is at approximately -0.08 and the Spearman Correlation is at approximately 0.13, meaning the variables, years since diagnosis and the disease severity measured have little to no association or relationship to one another.  
 
 
 ## Possible problematic points
@@ -236,7 +230,6 @@ cor(ra_wo286$Yrs_From_Dx, ra_wo286$DAS_28, use = "pairwise.complete.obs")
 cor(ra_wo286$Yrs_From_Dx, ra_wo286$DAS_28, use = "pairwise.complete.obs", method = "spearman")
 ```
 
-Yes, there was a data point I was concerned about that I wanted to take another look at. If I excluded that point from the analysis, the Pearson Correlation would increase, and my Spearman Correlation would also slightly increase, meaning without the problematic point I would see a slightly greater association between the years since diagnosis and disease severity, however, it is still a weak association.
 
 
 ## Whether DAS_28 was measured and years from diagnosis
@@ -269,7 +262,6 @@ ra %>%
   theme(legend.position = "none")
 ```
 
-The boxplots for individuals who did and did not have their DAS_28 measured are similar to each other with a difference, but not one of any significant note. Both boxplots are skewed to the right, meaning both of their means are greater than the medians. For both factors of DAS_28 measured, there are significantly higher counts of individuals from 0 to 20 years since diagnosis than compared to 20 years or more. Since there is a problematic point present the individuals who did not have their DAS_28 measured, we also see a slightly higher variance and standard deviation for this group compared to those who did have their DAS_28 measured.
 
 
 
@@ -300,14 +292,5 @@ ra %>%
   theme_bw()
 ```
 
-From the difference in proportions and the bar chart, there is once again a difference, but not one of significant note between individuals who did not take biologics and whether or not their disease score was measured, as the difference is 0.055 which is ~5.5%. We can see there are similar proportions between the individuals who had or did not have their disease score measured for biologic groups.
-
-
-
-
-
-# Summary of Findings
-
-Rheumatoid Arthritis is a serious condition that impacts many individuals. The data in this study was collected as a cross-sectional observational study, from patients in two age ranges (40-70, 75+) at a clinic in Philadelphia. Patients with a specific history were excluded from the study to mitigate confounding variables. There was a substantial amount of missing data in the study leading us to draw conclusions on incomplete data. Some trends I found within the data was there was much large proportion of females to males within the study as well as a large amount of patients who did not have their disease severity score measured compared to those who did have their disease score measured. However, there were weak associations between if DAS_28 was measured compared to the years since diagnosis and if biologics were used. Overall, when interpreting the results, I would warn my audience to consider the vast amount of missing data and how it could potentially lead to bias making the results from our data unable to be generalized to the general population of RA patients.
 
 
