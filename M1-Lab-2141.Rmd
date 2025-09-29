@@ -26,13 +26,9 @@ knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
 
 # Load Libraries and Import Data Set
 
-Load libraries:  
-
 ```{r}
 library(tidyverse) # package for plotting/data management
 ```
-
-Import the data:
 
 ```{r}
 ra <- read_csv(file = "Data/ArthritisTreatment.csv")
@@ -41,34 +37,7 @@ ra <- read_csv(file = "Data/ArthritisTreatment.csv")
 
 ```
 
-# Part 1: Study Design and Data
-
-## a) Study design
-
-__Do these data come from an experiment or an observational study?__
-
-Answer here (1a): This is an observational study.
-
-## b) Sampling 
-
-__How were the data sampled? That is, who was included in this study?__
-
-Answer here (1b): Rheumatoid arthritis (RA) patients in two age ranges (Group 1= 40-70 years, Group 2= 75+) who were receiving care at a clinic in Philadelphia were included in this study. Patients without a history of TB testing, HIV infection, active viral hepatitis, liver disease with AST/ALT 2x normal limits, history of organ transplantation, and/or active malignancy were included in the study.
-
-
-## c) Consequences of study design
-
-__Considering your answers to parts 1a and 1b, how might the study design impact our ability to generalize the results from this sample to other Rheumatoid Arthritis patients?__
-
-Answer here (1c): This is only one group of RA patients that were cared for in Philadelphia. The care at this clinic might be different than at other clinics treating RA around the US and/or around the world. Also, since it was a cross-sectional study, we will not be able to observe any developments these patients may have in the future. Finally, due to the nature of the study being observational, this may lead to confounding variables that affect the results.
-
-
-## d) Making factor variables
-
-__Three variables of interest for this lab are Sex, Biologics, and DAS28_YN (an indicator of if disease activity score was measured). These variables are coded as numbers (with 1s and 2s or 0s and 1s), but they represent categorical variables. For readability, create three new factor variables, Sex_f, Biologics_f, and DAS28_YN_f, with appropriate labels for each of these variables. We will use for the remainder of the assignment.__
-
-*Also, to make things easier later in the lab, please drop any row with a missing value in the following variables: DAS28_YN_f, Sex_f, Age, Yrs_From_Dx, Biologics_f*
-
+# Part 1: Creating New Factors and Dropping Missing Data
 
 ```{r}
 # Creating New Factor Variables
@@ -90,18 +59,14 @@ ra = ra %>%
   drop_na(DAS28_YN_f, Sex_f, Age, Yrs_From_Dx, Biologics_f)
 
 
-# create new variables with labels
-# hint: "mutate(DAS28_YN_f = factor("ORIGINAL VARIABLE NAME", levels = c("LEVELS THAT APPEAR IN THE DATA"), labels = c("LABELS YOU CHOOSE")))"
-
 ```
 
 
 
-# Part 2: Univariate Descriptions
+# Part 2: Univariate Numerical and Visualization Summaries
 
-__Create an appropriate visualization and numerical summary for each of the variables listed below. Using the graphical and numerical summaries you create, describe the variable.__
 
-## a) Sex
+## Sex
 
 ```{r}
 
@@ -122,10 +87,10 @@ ra %>%
 
 ```
 
-Description of variable distribution here: In the data, there was 417 females and 98 males included that did not have missing data, so approximately 81% of the data studied were female patients and roughly 19% were male patients. The bar chart shows a much higher count for females than for the males, almost by 4 fold.
+In the data, there was 417 females and 98 males included that did not have missing data, so approximately 81% of the data studied were female patients and roughly 19% were male patients. The bar chart shows a much higher count for females than for the males, almost by 4 fold.
 
 
-## b) Age  
+## Age  
 
 ```{r}
 
@@ -153,10 +118,10 @@ ra %>%
 ```
 
 
-Description of variable distribution here: From the histogram, the distribution is slightly skewed to the right meaning our mean age will be slightly larger than the median age. The median Age of the patients studied was 59 years old, and the IQR of the data is 12 with a standard deviation of 10.2 years.
+From the histogram, the distribution is slightly skewed to the right meaning our mean age will be slightly larger than the median age. The median Age of the patients studied was 59 years old, and the IQR of the data is 12 with a standard deviation of 10.2 years.
 
 
-## c) Whether DAS_28 was measured 
+## Whether DAS_28 was measured 
 
 ```{r}
  
@@ -177,9 +142,9 @@ ra %>%
 
 ```
 
-Description of variable distribution here: Considering the data, excluding rows with missing data, there was 449 patients who did not have DAS_28 measured and 66 patients who did have their DAS_28 measured. So, approximately 87% of patients did not have their DAS_28 measured, while 13% did have their DAS_28 measured. The bar chart shows a much higher count for patients who did not have their DAS_28 measured, than for the ones who did.
+Considering the data, excluding rows with missing data, there was 449 patients who did not have DAS_28 measured and 66 patients who did have their DAS_28 measured. So, approximately 87% of patients did not have their DAS_28 measured, while 13% did have their DAS_28 measured. The bar chart shows a much higher count for patients who did not have their DAS_28 measured, than for the ones who did.
 
-## d) DAS_28 values
+## DAS_28 values
 
 ```{r}
 # summary stats
@@ -202,10 +167,10 @@ ra %>% drop_na(DAS_28) %>%
   theme_bw()
 ```
 
-Description of variable distribution here: From the boxplot, DAS_28 is skewed to the right. The median DAS_28 measured from the patients studied was 2.5 joints. The IQR of the data was 1.48 with a standard deviation of 2.77 joints. The maximum (possible outlier) of the patients studied had a disease score activity of 23 joints, meaning this patient suffered a more severe disease compared to the average.
+From the boxplot, DAS_28 is skewed to the right. The median DAS_28 measured from the patients studied was 2.5 joints. The IQR of the data was 1.48 with a standard deviation of 2.77 joints. The maximum (possible outlier) of the patients studied had a disease score activity of 23 joints, meaning this patient suffered a more severe disease compared to the average.
 
 
-## e) Years from diagnosis
+## Years from diagnosis
 
 ```{r}
 
@@ -232,13 +197,12 @@ ra %>% drop_na(Yrs_From_Dx) %>%
 
 ```
 
-Description of variable distribution here: From the histogram, the Years from RA diagnosis is heavily skewed to the right. The median Years from RA diagnosis measured was 7 years. The IQR of the data was 8 years with a standard deviation of 9.29 years. The maximum (possible outlier) years from diagnosis of the patients studied was recorded at 70 years, meaning this patient was diagnosis much later than other patients.
+From the histogram, the Years from RA diagnosis is heavily skewed to the right. The median Years from RA diagnosis measured was 7 years. The IQR of the data was 8 years with a standard deviation of 9.29 years. The maximum (possible outlier) years from diagnosis of the patients studied was recorded at 70 years, meaning this patient was diagnosis much later than other patients.
 
-# Part 3: Bivariate Descriptions  
+# Part 3: Bivariate Numerical and Visualization Summary  
 
-## a) Years from Diagnosis and DAS 28
+## Years from Diagnosis and DAS 28
 
-__Create an appropriate visualization and numerical summary to examine the relationship between DAS_28 and years from diagnosis (Yrs_From_Dx). Using these descriptions, comment on the relationship between years since diagnosis and disease severity.__
 
 ```{r}
 
@@ -252,15 +216,14 @@ cor(ra$Yrs_From_Dx, ra$DAS_28, use = "pairwise.complete.obs")
 cor(ra$Yrs_From_Dx, ra$DAS_28, use = "pairwise.complete.obs", method = "spearman")
 ```
 
-Response here (relationship between variables): For both the Pearson and Spearman Correlations, the values are very close to 0. The Pearson Correlation is at approximately -0.08 and the Spearman Correlation is at approximately 0.13, meaning the variables, years since diagnosis and the disease severity measured have little to no association or relationship to one another.  
+For both the Pearson and Spearman Correlations, the values are very close to 0. The Pearson Correlation is at approximately -0.08 and the Spearman Correlation is at approximately 0.13, meaning the variables, years since diagnosis and the disease severity measured have little to no association or relationship to one another.  
 
 
-## b) Possible problematic points
+## Possible problematic points
 
-__In the visualization you created above, are there any data points that you are concerned about that you might consider taking a second look at? If yes, what would happen if you excluded that point from the analysis?__ 
 
 ```{r}
-# use this chunk to identiy any problematic points and exclude from the analysis you did above, if you found any potentially problematic points
+# problematic points
 ra_wo286 = ra %>% 
   filter(ID != 286)
 
@@ -273,12 +236,11 @@ cor(ra_wo286$Yrs_From_Dx, ra_wo286$DAS_28, use = "pairwise.complete.obs")
 cor(ra_wo286$Yrs_From_Dx, ra_wo286$DAS_28, use = "pairwise.complete.obs", method = "spearman")
 ```
 
-Response here: Yes, there was a data point I was concerned about that I wanted to take another look at. If I excluded that point from the analysis, the Pearson Correlation would increase, and my Spearman Correlation would also slightly increase, meaning without the problematic point I would see a slightly greater association between the years since diagnosis and disease severity, however, it is still a weak association.
+Yes, there was a data point I was concerned about that I wanted to take another look at. If I excluded that point from the analysis, the Pearson Correlation would increase, and my Spearman Correlation would also slightly increase, meaning without the problematic point I would see a slightly greater association between the years since diagnosis and disease severity, however, it is still a weak association.
 
 
-## c) Whether DAS_28 was measured and years from diagnosis
+## Whether DAS_28 was measured and years from diagnosis
 
-__Create an appropriate visualization and numerical summary to examine the relationship between whether the DAS_28 was measured and years from diagnosis (Yrs_From_Dx). Compare the distribution of time since diagnosis between the two groups (those with and those without DAS_28 measured). Are there any differences?__
 
 ```{r}
 # summary stats
@@ -307,13 +269,11 @@ ra %>%
   theme(legend.position = "none")
 ```
 
-Description here: The boxplots for individuals who did and did not have their DAS_28 measured are similar to each other with a difference, but not one of any significant note. Both boxplots are skewed to the right, meaning both of their means are greater than the medians. For both factors of DAS_28 measured, there are significantly higher counts of individuals from 0 to 20 years since diagnosis than compared to 20 years or more. Since there is a problematic point present the individuals who did not have their DAS_28 measured, we also see a slightly higher variance and standard deviation for this group compared to those who did have their DAS_28 measured.
+The boxplots for individuals who did and did not have their DAS_28 measured are similar to each other with a difference, but not one of any significant note. Both boxplots are skewed to the right, meaning both of their means are greater than the medians. For both factors of DAS_28 measured, there are significantly higher counts of individuals from 0 to 20 years since diagnosis than compared to 20 years or more. Since there is a problematic point present the individuals who did not have their DAS_28 measured, we also see a slightly higher variance and standard deviation for this group compared to those who did have their DAS_28 measured.
 
 
 
 ## d) Whether DAS_28 was measured and use of biologics
-
-__Create an appropriate visualization and numerical summary to examine the relationship between whether the DAS_28 was measured and use of biologics (Biologic_f). Calculate the difference in the proportion of subjects with disease activity scores measured in study participants taking and not taking biologics. Using these descriptions, comment on the relationship between use of biologics and having DAS_28 measured__
 
 
 ```{r}
@@ -340,32 +300,14 @@ ra %>%
   theme_bw()
 ```
 
-Description here: From the difference in proportions and the bar chart, there is once again a difference, but not one of significant note between individuals who did not take biologics and whether or not their disease score was measured, as the difference is 0.055 which is ~5.5%. We can see there are similar proportions between the individuals who had or did not have their disease score measured for biologic groups.
-
-
-## e) Consequences of 3c-d
- 
-__Consider what you found in parts 3c and 3d. How could this impact the conclusions we can draw from this study?__
-
-Response here: This would impact the conclusions we draw from this study as the results show there is no significant difference or association between whether DAS_28 measured, compared to years from diagnosis and if biologics were taken. Since there was a significant amount of data missing from the study, we need to be careful of the conclusions we draw since the missing data could lead to bias if the data is not missing at random. This means we would not be able to generalize our findings to the total population of RA patients.
+From the difference in proportions and the bar chart, there is once again a difference, but not one of significant note between individuals who did not take biologics and whether or not their disease score was measured, as the difference is 0.055 which is ~5.5%. We can see there are similar proportions between the individuals who had or did not have their disease score measured for biologic groups.
 
 
 
 
-# Summary
 
-## a) Summarize your findings
+# Summary of Findings
 
-__Summarize your findings. Describe the study design and the sample collected. What trends did you find? Are there any caveats you would want your audience to consider when interpreting the results you have shown here?__
-
-Response here: Rheumatoid Arthritis is a serious condition that impacts many individuals. The data in this study was collected as a cross-sectional observational study, from patients in two age ranges (40-70, 75+) at a clinic in Philadelphia. Patients with a specific history were excluded from the study to mitigate confounding variables. There was a substantial amount of missing data in the study leading us to draw conclusions on incomplete data. Some trends I found within the data was there was much large proportion of females to males within the study as well as a large amount of patients who did not have their disease severity score measured compared to those who did have their disease score measured. However, there were weak associations between if DAS_28 was measured compared to the years since diagnosis and if biologics were used. Overall, when interpreting the results, I would warn my audience to consider the vast amount of missing data and how it could potentially lead to bias making the results from our data unable to be generalized to the general population of RA patients.
-
-# Session Information
-
-Include this so if there are any issues we can check your R/package versions to see if this could be the source of any inconsistencies.
-
-```{r}
-sessionInfo()
-```
+Rheumatoid Arthritis is a serious condition that impacts many individuals. The data in this study was collected as a cross-sectional observational study, from patients in two age ranges (40-70, 75+) at a clinic in Philadelphia. Patients with a specific history were excluded from the study to mitigate confounding variables. There was a substantial amount of missing data in the study leading us to draw conclusions on incomplete data. Some trends I found within the data was there was much large proportion of females to males within the study as well as a large amount of patients who did not have their disease severity score measured compared to those who did have their disease score measured. However, there were weak associations between if DAS_28 was measured compared to the years since diagnosis and if biologics were used. Overall, when interpreting the results, I would warn my audience to consider the vast amount of missing data and how it could potentially lead to bias making the results from our data unable to be generalized to the general population of RA patients.
 
 
