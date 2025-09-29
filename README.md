@@ -2,7 +2,7 @@
 
 **Studying the Disease Activity Score (a measure of disease severity) from a sample of Rheumatoid Arthritis patients at a clinic in Philadelphia**
 
-[Click here to view my summaries and graphs](https://alt392.github.io/BIOST-Project-1/BIOST-Project-1.html)
+[Click here to view my statisticacl summaries and graphs](https://alt392.github.io/BIOST-Project-1/BIOST-Project-1.html)
 
 
 ## Overall Summary
