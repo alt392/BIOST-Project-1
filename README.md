@@ -2,7 +2,7 @@
 
 **Analyzed 600 Rheumatoid Arthritis (RA) EHR of patients receiving care at a clinic in Philadelphia. Provided visualization and numerical summaries of variables and drew conclusions on possible trends for measure of disease severity in RA patients.**
 
-[Click here to view my statistical summaries and graphs](https://alt392.github.io/BIOST-Project-1/)
+[Click here to view my statistical summaries and graphs](https://alt392.github.io/BIOST-Project-1/BIOST-Project-1.html)
 
 
 ## Overall Summary
